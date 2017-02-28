@@ -8,30 +8,67 @@ namespace Fifteen
 {
     class Game
     {
-        public readonly Cell Arr;
+        public readonly Point[] Arr;
+        public readonly ArrayOfCells Matrix;
         public readonly int Size;
 
         public Game(params int[] values)
         {
             double length = Math.Sqrt(values.Length);
-            this.Size = Convert.ToInt32(length);
-            Console.WriteLine(length + " " + Size);
+            Size = Convert.ToInt32(length);
 
-            if(Math.Abs(Size - length) != 0)
+            if (Math.Abs(Size - length) != 0)
             {
                 throw new System.ArgumentException("Неправильное заполнение поля!");
             }
 
-            Arr = new Cell(Size);
+            Matrix = new ArrayOfCells(Size);
+            Arr = new Point[values.Length];
 
             int k = 0;
             for (int x = 0; x < Size; x++)
             {
                 for (int y = 0; y < Size; y++)
                 {
-                    Arr[x, y] = values[k];
+                    Matrix[x, y] = values[k];
+                    if (k == values.Length)
+                        k = 0;
+                    Arr[values[k]] = new Point(x, y);
                     k++;
                 }
+            }
+
+        }
+
+        public Point GetLocation(int value)
+        {
+            return Arr[value];
+        }
+
+        public void Shift(int value)
+        {
+            Point valueLocation = GetLocation(value);
+            int x = valueLocation.X;
+            int y = valueLocation.Y;
+
+            Point zeroLocation = GetLocation(0);
+            int x0 = zeroLocation.X;
+            int y0 = zeroLocation.Y;
+
+            Point temp = new Point(-1, -1);
+
+            if (Math.Abs(x - x0) == 1 && Math.Abs(y - y0) == 0 ||
+                Math.Abs(y - y0) == 1 && Math.Abs(x - x0) == 0)
+            {
+                Matrix[x0, y0] = value;
+                Matrix[x, y] = 0;
+                temp = Arr[0];
+                Arr[0] = Arr[value];
+                Arr[value] = temp;
+            }
+            else
+            {
+                Console.WriteLine("Невозможный ход!");
             }
         }
 
@@ -41,48 +78,9 @@ namespace Fifteen
             {
                 for (int y = 0; y < Size; y++)
                 {
-                    Console.Write(Arr[x, y] + " ");
+                    Console.Write(Matrix[x, y] + " ");
                 }
                 Console.WriteLine();
-            }
-        }
-
-        public int[] GetLocation(int value)
-        {
-            int[] mas = { -1, -1};
-
-            for (int x = 0; x < Size; x++)
-                for (int y = 0; y < Size; y++)
-                    if (Arr[x, y] == value)
-                    {
-                        mas[0] = x;
-                        mas[1] = y;
-                    }
-            if (mas[0] < 0)
-            {
-                Console.WriteLine("Такого значения не существует");
-            }
-            return mas;
-        }
-
-        public void Shift(int value)
-        {
-            int[] valueLocation = GetLocation(value);
-            int x = valueLocation[0];
-            int y = valueLocation[1];
-
-            int[] zeroLocation = GetLocation(0);
-            int x0 = zeroLocation[0];
-            int y0 = zeroLocation[1];
-
-                if (Math.Abs(x - x0) == 1 && Math.Abs(y - y0) == 0 || Math.Abs(y - y0) == 1 && Math.Abs(x - x0) == 0)
-                {
-                    Arr[x0, y0] = value;
-                    Arr[x, y] = 0;
-                }
-            else
-            {
-                Console.WriteLine("Невозможный ход!");
             }
         }
     }

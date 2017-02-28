@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Fifteen
 {
-    class Cell
+    class ArrayOfCells
     {
-        public readonly int Length;
-        private int[ , ] cell;
+        private int[,] cell;
 
-        public Cell(int Size)
+        public ArrayOfCells(int size)
         {
-            cell = new int[Size, Size];
-            Length = Size;
+            cell = new int[size, size];
         }
 
         public int this[int x, int y]

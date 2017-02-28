@@ -13,7 +13,7 @@ namespace Fifteen
             Game newGame = new Game(1, 2, 3, 4, 5, 6, 7, 8, 0);
             newGame.Print();
 
-            while(1 == 1)
+            while (1 == 1)
             {
                 Console.Write("Введите число ");
                 int value = Convert.ToInt32(Console.ReadLine());
