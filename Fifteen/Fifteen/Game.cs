@@ -19,7 +19,7 @@ namespace Fifteen
 
             if (Math.Abs(Size - length) != 0)
             {
-                throw new System.ArgumentException("Неправильное заполнение поля!");
+                throw new System.ArgumentException("Неправильное заполнение поля!\n");
             }
 
             Matrix = new ArrayOfCells(Size);
@@ -47,28 +47,34 @@ namespace Fifteen
 
         public void Shift(int value)
         {
-            Point valueLocation = GetLocation(value);
-            int x = valueLocation.X;
-            int y = valueLocation.Y;
-
-            Point zeroLocation = GetLocation(0);
-            int x0 = zeroLocation.X;
-            int y0 = zeroLocation.Y;
-
-            Point temp = new Point(-1, -1);
-
-            if (Math.Abs(x - x0) == 1 && Math.Abs(y - y0) == 0 ||
-                Math.Abs(y - y0) == 1 && Math.Abs(x - x0) == 0)
+            try
             {
-                Matrix[x0, y0] = value;
-                Matrix[x, y] = 0;
-                temp = Arr[0];
-                Arr[0] = Arr[value];
-                Arr[value] = temp;
+                    Point valueLocation = GetLocation(value);
+                    int x = valueLocation.X;
+                    int y = valueLocation.Y;
+
+                    Point zeroLocation = GetLocation(0);
+                    int x0 = zeroLocation.X;
+                    int y0 = zeroLocation.Y;
+
+                    Point temp = new Point(-1, -1);
+                    if (Math.Abs(x - x0) == 1 && Math.Abs(y - y0) == 0 ||
+                        Math.Abs(y - y0) == 1 && Math.Abs(x - x0) == 0)
+                    {
+                        Matrix[x0, y0] = value;
+                        Matrix[x, y] = 0;
+                        temp = Arr[0];
+                        Arr[0] = Arr[value];
+                        Arr[value] = temp;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Невозможный ход!");
+                    }
             }
-            else
+            catch
             {
-                Console.WriteLine("Невозможный ход!");
+                Console.WriteLine("Такого значения нет!");
             }
         }
 
