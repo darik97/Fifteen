@@ -10,22 +10,22 @@ namespace Fifteen
     {
         static void Main(string[] args)
         {
-            Game newGame = new Game(1, 2, 3, 4, 5, 6, 7, 8, 0);
-            Print(newGame);
+            Game2 game = new Game2(1, 2, 3, 4, 5, 6, 7, 8, 0);
+            game.Rand();
+            Print(game);
 
-            while (1 == 1)
+            while (!game.IsWin())
             {
                 Console.Write("Введите число ");
                 int value = Convert.ToInt32(Console.ReadLine());
-                if (newGame.Shift(value) > 0)
-                    Print(newGame);
-                else if (newGame.Shift(value) == -1)
+                if (game.Shift(value) > 0)
+                    Print(game);
+                else if (game.Shift(value) == -1)
                     Console.WriteLine("Неовзможный ход!");
                 else
                     Console.WriteLine("Такого значения нет!");
-
             }
-
+            Console.WriteLine("Поздравляем! Вы победили!");
         }
 
         static void Print(Game game)

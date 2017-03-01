@@ -80,12 +80,13 @@ namespace Fifteen
             }
         }
 
-        private void Change(Point p0, Point p)
+        public void Change(Point p0, Point p)
         {
+            var t = Matrix[p0.X, p0.Y];
             Matrix[p0.X, p0.Y] = Matrix[p.X, p.Y];
-            Matrix[p.X, p.Y] = 0;
-            Point temp = Arr[0];
-            Arr[0] = Arr[Matrix[p0.X, p0.Y]];
+            Matrix[p.X, p.Y] = t;
+            Point temp = Arr[t];
+            Arr[t] = Arr[Matrix[p0.X, p0.Y]];
             Arr[Matrix[p0.X, p0.Y]] = temp;
         }
 
