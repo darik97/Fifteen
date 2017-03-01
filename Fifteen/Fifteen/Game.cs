@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,19 @@ namespace Fifteen
     class Game
     {
         public readonly Point[] Arr;
-        public readonly ArrayOfCells Matrix;
+        public readonly int[,] Matrix;
         public readonly int Size;
 
         public Game(params int[] values)
         {
-            double length = Math.Sqrt(values.Length);
-            Size = Convert.ToInt32(length);
+            Size = Convert.ToInt32(Math.Sqrt(values.Length));
 
-            if (Math.Abs(Size - length) != 0)
+            if (Math.Pow(Size, 2) - values.Length != 0)
             {
                 throw new System.ArgumentException("Неправильное заполнение поля!\n");
             }
 
-            Matrix = new ArrayOfCells(Size);
+            Matrix = new int[Size, Size];
             Arr = new Point[values.Length];
 
             int k = 0;
@@ -37,7 +37,6 @@ namespace Fifteen
                     k++;
                 }
             }
-
         }
 
         public Point GetLocation(int value)
@@ -45,49 +44,76 @@ namespace Fifteen
             return Arr[value];
         }
 
-        public void Shift(int value)
+        public int Shift(int value)
         {
-            try
+            if (value >= 0 && value < Arr.Length)
             {
-                    Point valueLocation = GetLocation(value);
-                    int x = valueLocation.X;
-                    int y = valueLocation.Y;
+                Point valueLocation = GetLocation(value);
+                Point zeroLocation = GetLocation(0);
 
-                    Point zeroLocation = GetLocation(0);
-                    int x0 = zeroLocation.X;
-                    int y0 = zeroLocation.Y;
-
-                    Point temp = new Point(-1, -1);
-                    if (Math.Abs(x - x0) == 1 && Math.Abs(y - y0) == 0 ||
-                        Math.Abs(y - y0) == 1 && Math.Abs(x - x0) == 0)
-                    {
-                        Matrix[x0, y0] = value;
-                        Matrix[x, y] = 0;
-                        temp = Arr[0];
-                        Arr[0] = Arr[value];
-                        Arr[value] = temp;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Невозможный ход!");
-                    }
+                if (Math.Abs(valueLocation.X - zeroLocation.X) == 1 && Math.Abs(valueLocation.Y - zeroLocation.Y) == 0 ||
+                    Math.Abs(valueLocation.X - zeroLocation.X) == 0 && Math.Abs(valueLocation.Y - zeroLocation.Y) == 1)
+                {
+                    Change(zeroLocation, valueLocation);
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
             }
-            catch
+            else
             {
-                Console.WriteLine("Такого значения нет!");
+                return -2;
             }
         }
 
-        public void Print()
+        public int this[int x, int y]
         {
-            for (int x = 0; x < Size; x++)
+            get
             {
-                for (int y = 0; y < Size; y++)
-                {
-                    Console.Write(Matrix[x, y] + " ");
-                }
-                Console.WriteLine();
+                return Matrix[x, y];
             }
+            set
+            {
+                Matrix[x, y] = value;
+            }
+        }
+
+        private void Change(Point p0, Point p)
+        {
+            Matrix[p0.X, p0.Y] = Matrix[p.X, p.Y];
+            Matrix[p.X, p.Y] = 0;
+            Point temp = Arr[0];
+            Arr[0] = Arr[Matrix[p0.X, p0.Y]];
+            Arr[Matrix[p0.X, p0.Y]] = temp;
+        }
+
+        public static Game FromCSV(string file)
+        {
+            string[] lines = File.ReadAllLines(file);
+            int size = lines.Length;
+            string temp;
+            int[] numbers = new int[size * size];
+            int k = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                if (lines[i].Length != size)
+                    return null;
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    temp = lines[i].Substring(0, lines[i].IndexOf(',')).Trim();
+                    numbers[k] = Convert.ToInt32(temp);
+                    lines[i] = lines[i].Substring(lines[i].IndexOf(','));
+                    k++;
+                }
+            }
+            return new Game(numbers);
         }
     }
 }
