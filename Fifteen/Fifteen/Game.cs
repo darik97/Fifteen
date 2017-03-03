@@ -44,7 +44,7 @@ namespace Fifteen
             return Arr[value];
         }
 
-        public int Shift(int value)
+        public virtual int Shift(int value)
         {
             if (value >= 0 && value < Arr.Length)
             {

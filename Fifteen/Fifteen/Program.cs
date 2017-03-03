@@ -10,7 +10,7 @@ namespace Fifteen
     {
         static void Main(string[] args)
         {
-            Game2 game = new Game2(1, 2, 3, 4, 5, 6, 7, 8, 0);
+            Game3 game = new Game3(1, 2, 3, 4, 5, 6, 7, 8, 0);
             game.Rand();
             Print(game);
 
@@ -24,6 +24,12 @@ namespace Fifteen
                     Console.WriteLine("Неовзможный ход!");
                 else
                     Console.WriteLine("Такого значения нет!");
+
+                Console.Write("Отменить ходы ");
+                int steps = Convert.ToInt32(Console.ReadLine());
+                game.MakeStepsBack(steps);
+                Print(game);
+                
             }
             Console.WriteLine("Поздравляем! Вы победили!");
         }

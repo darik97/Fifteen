@@ -13,11 +13,9 @@ namespace Fifteen
         public void Rand()
         {
              Random ran = new Random();
-             for (int i = 0; i < ran.Next(50, 120); i++)
+             for (int i = 0; i < 9999; i++)
              {
-                 var p1 = GetLocation(ran.Next(0, Arr.Length - 1));
-                 var p2 = GetLocation(ran.Next(0, Arr.Length - 1));
-                 Change(p1, p2);
+                 base.Shift(ran.Next(1, Arr.Length - 1));
              }
         }
 
@@ -28,9 +26,7 @@ namespace Fifteen
             {
                 for (int y = 0; y < Size; y++)
                 {
-                    if (k == Size * Size)
-                        k = 0;
-                    if (Matrix[x, y] != k)
+                    if (Matrix[x, y] != k && k < Size * Size)
                         return false;
                     k++;
                 }
