@@ -15,16 +15,11 @@ namespace Fifteen
             History = new Stack<int>();
         }
 
-        public void AddToHistory(int val)
-        {
-            History.Push(val);
-        }
-
         public override int Shift(int value)
         {
             if (value > 0 && value < Arr.Length)
             {
-                AddToHistory(value);
+                History.Push(value);
             }
             return base.Shift(value);
         }
