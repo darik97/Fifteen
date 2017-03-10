@@ -21,7 +21,13 @@ namespace Fifteen
             {
                 throw new System.ArgumentException("Неправильное заполнение поля!\n");
             }
-
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] < 0 && values[i] > values.Length - 1 && values[i] != i + 1)
+                {
+                    throw new System.ArgumentException("Неправильное заполнение поля!\n");
+                }
+            }
             Matrix = new int[Size, Size];
             Arr = new Point[values.Length];
 
@@ -44,7 +50,7 @@ namespace Fifteen
             return Arr[value];
         }
 
-        public virtual int Shift(int value)
+        public virtual void Shift(int value)
         {
             if (value >= 0 && value < Arr.Length)
             {
@@ -55,16 +61,15 @@ namespace Fifteen
                     Math.Abs(valueLocation.X - zeroLocation.X) == 0 && Math.Abs(valueLocation.Y - zeroLocation.Y) == 1)
                 {
                     Change(zeroLocation, valueLocation);
-                    return 1;
                 }
                 else
                 {
-                    return -1;
+                    throw new ArgumentException("Невозможный ход!\n");
                 }
             }
             else
             {
-                return -2;
+                throw new ArgumentException("Недопустимое значение!\n");
             }
         }
 

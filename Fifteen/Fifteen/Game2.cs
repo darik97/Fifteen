@@ -12,11 +12,48 @@ namespace Fifteen
 
         public void Rand()
         {
-             Random ran = new Random();
-             for (int i = 0; i < 9999; i++)
-             {
-                 base.Shift(ran.Next(1, Arr.Length - 1));
-             }
+            int[] valuesAround = new int [4];
+            Random ran = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                Point zero = GetLocation(0);
+                if (zero.X < Size - 1 && zero.Y < Size - 1 && zero.X > 0 && zero.Y > 0)
+                {
+                    valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                    valuesAround[1] = Matrix[zero.X + 1, zero.Y];
+                    valuesAround[2] = Matrix[zero.X, zero.Y - 1];
+                    valuesAround[3] = Matrix[zero.X, zero.Y + 1];
+                    base.Shift(valuesAround[ran.Next(0, 3)]);
+                }
+                else if (zero.X == Size - 1 && zero.Y < Size - 1 && zero.Y > 0)
+                {
+                    valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                    valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                    valuesAround[2] = Matrix[zero.X, zero.Y + 1];
+                    base.Shift(valuesAround[ran.Next(0, 2)]);
+                }
+                else if (zero.X == 0 && zero.Y < Size - 1 && zero.Y > 0)
+                {
+                    valuesAround[0] = Matrix[zero.X + 1, zero.Y];
+                    valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                    valuesAround[2] = Matrix[zero.X, zero.Y + 1];
+                    base.Shift(valuesAround[ran.Next(0, 2)]);
+                }
+                else if (zero.X < Size - 1 && zero.X > 0 && zero.Y == Size - 1)
+                {
+                    valuesAround[0] = Matrix[zero.X + 1, zero.Y];
+                    valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                    valuesAround[2] = Matrix[zero.X - 1, zero.Y];
+                    base.Shift(valuesAround[ran.Next(0, 2)]);
+                }
+                else if (zero.X < Size - 1 && zero.X > 0 && zero.Y == 0)
+                {
+                    valuesAround[0] = Matrix[zero.X + 1, zero.Y];
+                    valuesAround[1] = Matrix[zero.X - 1, zero.Y];
+                    valuesAround[2] = Matrix[zero.X, zero.Y + 1];
+                    base.Shift(valuesAround[ran.Next(0, 2)]);
+                }
+            }
         }
 
         public bool IsWin()
