@@ -18,12 +18,7 @@ namespace Fifteen
             {
                 Console.Write("Введите число ");
                 int value = Convert.ToInt32(Console.ReadLine());
-                if (game.Shift(value) > 0)
                     Print(game);
-                else if (game.Shift(value) == -1)
-                    Console.WriteLine("Неовзможный ход!");
-                else
-                    Console.WriteLine("Такого значения нет!");
 
                 Console.Write("Отменить ходы ");
                 int steps = Convert.ToInt32(Console.ReadLine());

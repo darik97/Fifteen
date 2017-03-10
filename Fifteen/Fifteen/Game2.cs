@@ -12,47 +12,101 @@ namespace Fifteen
 
         public void Rand()
         {
-            int[] valuesAround = new int [4];
+            int[] valuesAround = new int[4];
             Random ran = new Random();
             for (int i = 0; i < 50; i++)
             {
                 Point zero = GetLocation(0);
-                if (zero.X < Size - 1 && zero.Y < Size - 1 && zero.X > 0 && zero.Y > 0)
-                {
-                    valuesAround[0] = Matrix[zero.X - 1, zero.Y];
-                    valuesAround[1] = Matrix[zero.X + 1, zero.Y];
-                    valuesAround[2] = Matrix[zero.X, zero.Y - 1];
-                    valuesAround[3] = Matrix[zero.X, zero.Y + 1];
-                    base.Shift(valuesAround[ran.Next(0, 3)]);
-                }
-                else if (zero.X == Size - 1 && zero.Y < Size - 1 && zero.Y > 0)
-                {
-                    valuesAround[0] = Matrix[zero.X - 1, zero.Y];
-                    valuesAround[1] = Matrix[zero.X, zero.Y - 1];
-                    valuesAround[2] = Matrix[zero.X, zero.Y + 1];
-                    base.Shift(valuesAround[ran.Next(0, 2)]);
-                }
-                else if (zero.X == 0 && zero.Y < Size - 1 && zero.Y > 0)
-                {
-                    valuesAround[0] = Matrix[zero.X + 1, zero.Y];
-                    valuesAround[1] = Matrix[zero.X, zero.Y - 1];
-                    valuesAround[2] = Matrix[zero.X, zero.Y + 1];
-                    base.Shift(valuesAround[ran.Next(0, 2)]);
-                }
-                else if (zero.X < Size - 1 && zero.X > 0 && zero.Y == Size - 1)
-                {
-                    valuesAround[0] = Matrix[zero.X + 1, zero.Y];
-                    valuesAround[1] = Matrix[zero.X, zero.Y - 1];
-                    valuesAround[2] = Matrix[zero.X - 1, zero.Y];
-                    base.Shift(valuesAround[ran.Next(0, 2)]);
-                }
-                else if (zero.X < Size - 1 && zero.X > 0 && zero.Y == 0)
-                {
-                    valuesAround[0] = Matrix[zero.X + 1, zero.Y];
-                    valuesAround[1] = Matrix[zero.X - 1, zero.Y];
-                    valuesAround[2] = Matrix[zero.X, zero.Y + 1];
-                    base.Shift(valuesAround[ran.Next(0, 2)]);
-                }
+
+                if (zero.X == 0)
+                    if (zero.Y == 0)
+                    {
+                        valuesAround[0] = Matrix[zero.X + 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y + 1];
+                        base.Shift(valuesAround[ran.Next(0, 1)]);
+                        break;
+                    }
+                    else if (zero.Y == Size - 1)
+                    {
+                        valuesAround[0] = Matrix[zero.X + 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                        base.Shift(valuesAround[ran.Next(0, 1)]);
+                        break;
+                    }
+                    else
+                    {
+                        valuesAround[0] = Matrix[zero.X + 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                        valuesAround[2] = Matrix[zero.X, zero.Y + 1];
+                        base.Shift(valuesAround[ran.Next(0, 2)]);
+                        break;
+                    }
+                if (zero.X == Size - 1)
+                    if (zero.Y == 0)
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y + 1];
+                        base.Shift(valuesAround[ran.Next(0, 1)]);
+                        break;
+                    }
+                    else if (zero.Y == Size - 1)
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                        base.Shift(valuesAround[ran.Next(0, 1)]);
+                        break;
+                    }
+                    else
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                        valuesAround[2] = Matrix[zero.X, zero.Y + 1];
+                        base.Shift(valuesAround[ran.Next(0, 2)]);
+                        break;
+                    }
+                if (zero.X > 0 && zero.X < Size - 1)
+                    if (zero.Y == 0)
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y + 1];
+                        valuesAround[2] = Matrix[zero.X + 1, zero.Y];
+                        base.Shift(valuesAround[ran.Next(0, 2)]);
+                        break;
+                    }
+                    else if (zero.Y == Size - 1)
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                        valuesAround[2] = Matrix[zero.X + 1, zero.Y];
+                        base.Shift(valuesAround[ran.Next(0, 2)]);
+                        break;
+                    }
+                if (zero.X > 0 && zero.X < Size - 1)
+                    if (zero.Y == 0)
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y + 1];
+                        valuesAround[2] = Matrix[zero.X + 1, zero.Y];
+                        base.Shift(valuesAround[ran.Next(0, 2)]);
+                        break;
+                    }
+                    else if (zero.Y == Size - 1)
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X, zero.Y - 1];
+                        valuesAround[2] = Matrix[zero.X + 1, zero.Y];
+                        base.Shift(valuesAround[ran.Next(0, 2)]);
+                        break;
+                    }
+                    else
+                    {
+                        valuesAround[0] = Matrix[zero.X - 1, zero.Y];
+                        valuesAround[1] = Matrix[zero.X + 1, zero.Y];
+                        valuesAround[2] = Matrix[zero.X, zero.Y - 1];
+                        valuesAround[3] = Matrix[zero.X, zero.Y + 1];
+                        base.Shift(valuesAround[ran.Next(0, 3)]);
+                        break;
+                    }
             }
         }
 
