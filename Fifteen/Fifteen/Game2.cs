@@ -24,14 +24,12 @@ namespace Fifteen
                         valuesAround[0] = Matrix[zero.X + 1, zero.Y];
                         valuesAround[1] = Matrix[zero.X, zero.Y + 1];
                         base.Shift(valuesAround[ran.Next(0, 1)]);
-                        break;
                     }
                     else if (zero.Y == Size - 1)
                     {
                         valuesAround[0] = Matrix[zero.X + 1, zero.Y];
                         valuesAround[1] = Matrix[zero.X, zero.Y - 1];
                         base.Shift(valuesAround[ran.Next(0, 1)]);
-                        break;
                     }
                     else
                     {
@@ -39,7 +37,6 @@ namespace Fifteen
                         valuesAround[1] = Matrix[zero.X, zero.Y - 1];
                         valuesAround[2] = Matrix[zero.X, zero.Y + 1];
                         base.Shift(valuesAround[ran.Next(0, 2)]);
-                        break;
                     }
                 if (zero.X == Size - 1)
                     if (zero.Y == 0)
@@ -47,14 +44,12 @@ namespace Fifteen
                         valuesAround[0] = Matrix[zero.X - 1, zero.Y];
                         valuesAround[1] = Matrix[zero.X, zero.Y + 1];
                         base.Shift(valuesAround[ran.Next(0, 1)]);
-                        break;
                     }
                     else if (zero.Y == Size - 1)
                     {
                         valuesAround[0] = Matrix[zero.X - 1, zero.Y];
                         valuesAround[1] = Matrix[zero.X, zero.Y - 1];
                         base.Shift(valuesAround[ran.Next(0, 1)]);
-                        break;
                     }
                     else
                     {
@@ -62,7 +57,6 @@ namespace Fifteen
                         valuesAround[1] = Matrix[zero.X, zero.Y - 1];
                         valuesAround[2] = Matrix[zero.X, zero.Y + 1];
                         base.Shift(valuesAround[ran.Next(0, 2)]);
-                        break;
                     }
                 if (zero.X > 0 && zero.X < Size - 1)
                     if (zero.Y == 0)
@@ -71,7 +65,6 @@ namespace Fifteen
                         valuesAround[1] = Matrix[zero.X, zero.Y + 1];
                         valuesAround[2] = Matrix[zero.X + 1, zero.Y];
                         base.Shift(valuesAround[ran.Next(0, 2)]);
-                        break;
                     }
                     else if (zero.Y == Size - 1)
                     {
@@ -79,7 +72,6 @@ namespace Fifteen
                         valuesAround[1] = Matrix[zero.X, zero.Y - 1];
                         valuesAround[2] = Matrix[zero.X + 1, zero.Y];
                         base.Shift(valuesAround[ran.Next(0, 2)]);
-                        break;
                     }
                 if (zero.X > 0 && zero.X < Size - 1)
                     if (zero.Y == 0)
@@ -88,7 +80,6 @@ namespace Fifteen
                         valuesAround[1] = Matrix[zero.X, zero.Y + 1];
                         valuesAround[2] = Matrix[zero.X + 1, zero.Y];
                         base.Shift(valuesAround[ran.Next(0, 2)]);
-                        break;
                     }
                     else if (zero.Y == Size - 1)
                     {
@@ -96,7 +87,6 @@ namespace Fifteen
                         valuesAround[1] = Matrix[zero.X, zero.Y - 1];
                         valuesAround[2] = Matrix[zero.X + 1, zero.Y];
                         base.Shift(valuesAround[ran.Next(0, 2)]);
-                        break;
                     }
                     else
                     {
@@ -105,7 +95,6 @@ namespace Fifteen
                         valuesAround[2] = Matrix[zero.X, zero.Y - 1];
                         valuesAround[3] = Matrix[zero.X, zero.Y + 1];
                         base.Shift(valuesAround[ran.Next(0, 3)]);
-                        break;
                     }
             }
         }
