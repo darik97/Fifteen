@@ -10,7 +10,7 @@ namespace Fifteen
     class Game
     {
         public readonly Point[] Arr;
-        public readonly int[,] Matrix;
+        public readonly int[,] GameField;
         public readonly int Size;
 
         public Game(params int[] values)
@@ -28,7 +28,7 @@ namespace Fifteen
                     throw new System.ArgumentException("Неправильное заполнение поля!\n");
                 }
             }
-            Matrix = new int[Size, Size];
+            GameField = new int[Size, Size];
             Arr = new Point[values.Length];
 
             int k = 0;
@@ -36,7 +36,7 @@ namespace Fifteen
             {
                 for (int y = 0; y < Size; y++)
                 {
-                    Matrix[x, y] = values[k];
+                    GameField[x, y] = values[k];
                     if (k == values.Length)
                         k = 0;
                     Arr[values[k]] = new Point(x, y);
@@ -77,22 +77,22 @@ namespace Fifteen
         {
             get
             {
-                return Matrix[x, y];
+                return GameField[x, y];
             }
             set
             {
-                Matrix[x, y] = value;
+                GameField[x, y] = value;
             }
         }
 
         public void Change(Point p0, Point p)
         {
-            var t = Matrix[p0.X, p0.Y];
-            Matrix[p0.X, p0.Y] = Matrix[p.X, p.Y];
-            Matrix[p.X, p.Y] = t;
+            var t = GameField[p0.X, p0.Y];
+            GameField[p0.X, p0.Y] = GameField[p.X, p.Y];
+            GameField[p.X, p.Y] = t;
             Point temp = Arr[t];
-            Arr[t] = Arr[Matrix[p0.X, p0.Y]];
-            Arr[Matrix[p0.X, p0.Y]] = temp;
+            Arr[t] = Arr[GameField[p0.X, p0.Y]];
+            Arr[GameField[p0.X, p0.Y]] = temp;
         }
 
         public static Game FromCSV(string file)
@@ -120,6 +120,18 @@ namespace Fifteen
                 }
             }
             return new Game(numbers);
+        }
+
+        public void Print()
+        {
+            for (int x = 0; x < Size; x++)
+            {
+                for (int y = 0; y < Size; y++)
+                {
+                    Console.Write(GameField[x, y] + " ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

@@ -6,25 +6,32 @@ using System.Threading.Tasks;
 
 namespace Fifteen
 {
+
     class Program
     {
         static void Main(string[] args)
         {
-            Game3 game = new Game3(1, 2, 3, 4, 5, 6, 7, 8, 0);
-            game.Rand();
-            Print(game);
+            //IPlayable game;
+            Console.Write("Введите, с каким классом работать: ");
+            int gameClass = Convert.ToInt32(Console.ReadLine());
+            ConsoleGameUI game = new ConsoleGameUI(gameClass);
 
-            while (!game.IsWin())
+            game.Randomize();
+
+            game.Print();
+
+            while (!game.IsFinished())
             {
                 Console.Write("Введите число ");
                 int value = Convert.ToInt32(Console.ReadLine());
-                    Print(game);
+                game.Shift(value);
+                game.Print();
 
-                Console.Write("Отменить ходы ");
-                int steps = Convert.ToInt32(Console.ReadLine());
-                game.MakeStepsBack(steps);
-                Print(game);
-                
+                //Console.Write("Отменить ходы ");
+                //int steps = Convert.ToInt32(Console.ReadLine());
+                //game.MakeStepsBack(steps);
+                //Print(game);
+
             }
             Console.WriteLine("Поздравляем! Вы победили!");
         }
@@ -35,10 +42,12 @@ namespace Fifteen
             {
                 for (int y = 0; y < game.Size; y++)
                 {
-                    Console.Write(game.Matrix[x, y] + " ");
+                    Console.Write(game.GameField[x, y] + " ");
                 }
                 Console.WriteLine();
             }
         }
     }
 }
+
+

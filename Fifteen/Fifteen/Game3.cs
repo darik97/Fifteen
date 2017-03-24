@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fifteen
 {
-    class Game3 : Game2
+    class Game3 : Game2, IPlayable
     {
         public readonly Stack<int> History;
 
@@ -15,13 +15,19 @@ namespace Fifteen
             History = new Stack<int>();
         }
 
-        public override void Shift(int value)   
+        public override void Randomize()
+        {
+            base.Randomize();
+            History.Clear();
+        }
+
+        public override void Shift(int value)
         {
             if (value > 0 && value < Arr.Length)
             {
+                base.Shift(value);
                 History.Push(value);
             }
-            base.Shift(value);
         }
 
         public void MakeStepsBack(int number)
