@@ -21,24 +21,53 @@ namespace Fifteen
             }
         }
 
-        public void Randomize()
+        public void Play()
         {
             game.Randomize();
+
+            Print((Game)game);
+
+            while (!game.IsFinished())
+            {
+                Console.Write("Введите число ");
+                int value = Convert.ToInt32(Console.ReadLine());
+                game.Shift(value);
+                Print((Game) game);
+
+            }
+            Console.WriteLine("Поздравляем! Вы победили!");
         }
 
-        public void Print()
+        public void Print(Game game)
         {
-            game.Print();
+            for (int x = 0; x < game.Size; x++)
+            {
+                for (int y = 0; y < game.Size; y++)
+                {
+                    Console.Write(game.GameField[x, y] + " ");
+                }
+                Console.WriteLine();
+            }
         }
 
-        public void Shift(int value)
-        {
-            game.Shift(value);
-        }
+        //public void Randomize()
+        //{
+        //    game.Randomize();
+        //}
 
-        public bool IsFinished()
-        {
-            return game.IsFinished();
-        }
+        //public void Print()
+        //{
+        //    game.Print();
+        //}
+
+        //public void Shift(int value)
+        //{
+        //    game.Shift(value);
+        //}
+
+        //public bool IsFinished()
+        //{
+        //    return game.IsFinished();
+        //}
     }
 }

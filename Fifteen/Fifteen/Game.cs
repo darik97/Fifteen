@@ -121,17 +121,5 @@ namespace Fifteen
             }
             return new Game(numbers);
         }
-
-        public void Print()
-        {
-            for (int x = 0; x < Size; x++)
-            {
-                for (int y = 0; y < Size; y++)
-                {
-                    Console.Write(GameField[x, y] + " ");
-                }
-                Console.WriteLine();
-            }
-        }
     }
 }

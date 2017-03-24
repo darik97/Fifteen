@@ -11,6 +11,5 @@ namespace Fifteen
         void Randomize();
         void Shift(int value);
         bool IsFinished();
-        void Print();
     }
 }

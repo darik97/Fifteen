@@ -16,24 +16,26 @@ namespace Fifteen
             int gameClass = Convert.ToInt32(Console.ReadLine());
             ConsoleGameUI game = new ConsoleGameUI(gameClass);
 
-            game.Randomize();
+            game.Play();
 
-            game.Print();
+            //game.Randomize();
 
-            while (!game.IsFinished())
-            {
-                Console.Write("Введите число ");
-                int value = Convert.ToInt32(Console.ReadLine());
-                game.Shift(value);
-                game.Print();
+            //game.Print();
 
-                //Console.Write("Отменить ходы ");
-                //int steps = Convert.ToInt32(Console.ReadLine());
-                //game.MakeStepsBack(steps);
-                //Print(game);
+            //while (!game.IsFinished())
+            //{
+            //    Console.Write("Введите число ");
+            //    int value = Convert.ToInt32(Console.ReadLine());
+            //    game.Shift(value);
+            //    game.Print();
 
-            }
-            Console.WriteLine("Поздравляем! Вы победили!");
+            //    //Console.Write("Отменить ходы ");
+            //    //int steps = Convert.ToInt32(Console.ReadLine());
+            //    //game.MakeStepsBack(steps);
+            //    //Print(game);
+
+            //}
+            //Console.WriteLine("Поздравляем! Вы победили!");
         }
 
         static void Print(Game game)
