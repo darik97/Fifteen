@@ -35,13 +35,13 @@ namespace Fifteen
         {
             string valueS = Convert.ToString(Console.ReadLine());
             for (int i = 0; i < valueS.Length; i++)
-                if (valueS[i] > '9')
+                if (valueS[i] < '0' || valueS[i] > '9')
                 {
                     Console.WriteLine("Введите число от 0 до " + (Math.Pow(game.Size, 2) - 1) + "!");
                     GetValueToShift();
                 }
             int value = Convert.ToInt32(valueS);
-            if (value > Math.Pow(game.Size, 2) - 1)
+            if (value < 0 || value > Math.Pow(game.Size, 2) - 1)
             {
                 Console.WriteLine("Введите число от 0 до " + (Math.Pow(game.Size, 2) - 1) + "!");
                 GetValueToShift();
