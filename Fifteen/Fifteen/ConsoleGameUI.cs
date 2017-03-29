@@ -9,65 +9,56 @@ namespace Fifteen
     class ConsoleGameUI
     {
         IPlayable game;
-        public ConsoleGameUI(int gameClass)
+        public ConsoleGameUI(IPlayable game)
         {
-            if (gameClass == 2)
-            {
-                game = new Game2(1, 2, 3, 4, 5, 6, 7, 8, 0);
-            }
-            else
-            {
-                game = new Game3(1, 2, 3, 4, 5, 6, 7, 8, 0);
-            }
+            this.game = game;
         }
 
         public void Play()
         {
+            int maxValue = Convert.ToInt32(Math.Pow(game.Size, 2) - 1);
             game.Randomize();
 
-            Print((Game)game);
+            Print();
 
             while (!game.IsFinished())
             {
                 Console.Write("Введите число ");
-                int value = Convert.ToInt32(Console.ReadLine());
+                int value = GetValueToShift();
                 game.Shift(value);
-                Print((Game) game);
-
+                Print();
             }
             Console.WriteLine("Поздравляем! Вы победили!");
         }
 
-        public void Print(Game game)
+        public int GetValueToShift()
+        {
+            string valueS = Convert.ToString(Console.ReadLine());
+            for (int i = 0; i < valueS.Length; i++)
+                if (valueS[i] > '9')
+                {
+                    Console.WriteLine("Введите число от 0 до " + (Math.Pow(game.Size, 2) - 1) + "!");
+                    GetValueToShift();
+                }
+            int value = Convert.ToInt32(valueS);
+            if (value > Math.Pow(game.Size, 2) - 1)
+            {
+                Console.WriteLine("Введите число от 0 до " + (Math.Pow(game.Size, 2) - 1) + "!");
+                GetValueToShift();
+            }
+            return value;
+        }
+
+        public void Print()
         {
             for (int x = 0; x < game.Size; x++)
             {
                 for (int y = 0; y < game.Size; y++)
                 {
-                    Console.Write(game.GameField[x, y] + " ");
+                    Console.Write(game[x, y] + " ");
                 }
                 Console.WriteLine();
             }
         }
-
-        //public void Randomize()
-        //{
-        //    game.Randomize();
-        //}
-
-        //public void Print()
-        //{
-        //    game.Print();
-        //}
-
-        //public void Shift(int value)
-        //{
-        //    game.Shift(value);
-        //}
-
-        //public bool IsFinished()
-        //{
-        //    return game.IsFinished();
-        //}
     }
 }

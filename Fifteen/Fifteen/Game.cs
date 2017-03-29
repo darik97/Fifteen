@@ -11,7 +11,7 @@ namespace Fifteen
     {
         public readonly Point[] Arr;
         public readonly int[,] GameField;
-        public readonly int Size;
+        public int Size { private set; get;}
 
         public Game(params int[] values)
         {
